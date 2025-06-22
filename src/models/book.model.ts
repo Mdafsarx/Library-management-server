@@ -27,7 +27,7 @@ const bookSchema = new mongoose.Schema<IBook, Model<IBook>, IDeductCopyMethod>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 bookSchema.method("deductCopy", async function (quantity: number) {

@@ -1,4 +1,5 @@
 import express, { Application, NextFunction, Request, Response } from "express";
+import cors from 'cors';
 import { bookRouter } from "./routes/book.route";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { borrowRouter } from "./routes/borrow.route";
@@ -6,6 +7,7 @@ import { borrowRouter } from "./routes/borrow.route";
 export const app: Application = express();
 
 app.use(express.json());
+app.use(cors())
 // router
 app.use("/api", bookRouter);
 app.use("/api", borrowRouter);

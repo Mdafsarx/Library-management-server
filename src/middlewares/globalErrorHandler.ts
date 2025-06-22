@@ -1,10 +1,10 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { ErrorRequestHandler } from "express";
 
 export const globalErrorHandler: ErrorRequestHandler = (
   err,
   req,
   res,
-  next
+  next,
 ) => {
   if (err) {
     const statusCode = err.statusCode || 500;
