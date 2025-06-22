@@ -1,23 +1,19 @@
-<h1 align="center">📚 Library Management API</h1>
+<h1 align="center">📚 Library Management Server</h1>
 
-<p align="center">The Library Management API is a backend application built with Express, TypeScript, and MongoDB using Mongoose. It manages library books through Mongoose models, enforcing schema validation and business logic. The system supports creating, updating, deleting, and fetching books, while ensuring valid genres and unique ISBNs. Borrowing logic is handled using Mongoose instance/static methods to deduct available copies and update availability status. It also uses MongoDB aggregation to summarize borrowed books. This API provides efficient, schema-driven book and borrow management for any library system.
-</p>
+<p align="center">The Library Management API is a backend system built with Express, TypeScript, and MongoDB (Mongoose). It manages books with schema validation, supports CRUD operations, enforces valid genres and unique ISBNs, and handles borrowing through Mongoose methods. Aggregation is used to summarize borrow data, providing an efficient, schema-driven solution for library systems.</p>
 
 <img src="./erdiagram.png" alt="Entity-Relationship Diagrams" width="100%" height="350"/>
 
 ---
 
 **`API`:** [Link](https://library-management-server-one-eta.vercel.app)  
-**`Explanation`:** [Video](https://github.com/Mdafsarx/Bookify-Backend)
+**`Explanation`:** [Video](https://www.loom.com/share/90b206e371ad4f0599a4b0a3b59ca538?sid=ceef0fad-f71e-4f9b-b5ff-a506bdbbee8c)
 
 ## 🚀 Features
 
-- CRUD operations for Books
-- Book borrowing functionality
 - Automatic copy deduction & availability status update
 - Borrowed book summary via aggregation
-- Filtering, sorting, and pagination for books
-- Input validation and meaningful error handling
+- Filtering, sorting for books
 
 ## 📦 Technologies Used
 
@@ -32,8 +28,8 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/library-management-api.git
-cd library-management-api
+git clone https://github.com/Mdafsarx/Library-management-server
+cd Library-management-server
 
 # 2. Install dependencies
 npm install
@@ -82,7 +78,7 @@ LIBRARY-MANAGEMENT-SERVER/
 
 ## 📘 API Endpoints
 
-**🔰 Base URL**
+**Base URL**
 
 ```bash
 http://localhost:5000/api
