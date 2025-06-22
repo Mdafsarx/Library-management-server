@@ -1,5 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import { IBook, IDeductCopyMethod } from "../types/book";
+import { Borrow } from "./borrow.model";
 
 const bookSchema = new mongoose.Schema<IBook, Model<IBook>, IDeductCopyMethod>(
   {
@@ -38,6 +39,13 @@ bookSchema.method("updateAvailability", async function () {
   if (this.copies === 0 && this.available) {
     this.available = false;
     await this.save();
+  }
+});
+
+bookSchema.post("findOneAndDelete", async (doc, next) => {
+  if (doc) {
+    await Borrow.deleteMany({ book: doc._id });
+    next();
   }
 });
 
