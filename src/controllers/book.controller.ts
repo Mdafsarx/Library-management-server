@@ -43,7 +43,7 @@ export const BookController = {
 
   updateBook: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await BookService.updateBook(req.params.bookId, req.body);
+      const result = await BookService.updateBook(req.params.id, req.body);
       res.status(200).json({
         success: true,
         message: "Book updated successfully",
@@ -56,7 +56,7 @@ export const BookController = {
 
   deleteBook: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await BookService.deleteBook(req.params.bookId);
+      const result = await BookService.deleteBook(req.params.id);
       res.status(200).json({
         success: true,
         message: "Book deleted successfully",

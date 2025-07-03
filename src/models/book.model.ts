@@ -4,19 +4,13 @@ import { Borrow } from "./borrow.model";
 
 const bookSchema = new mongoose.Schema<IBook, Model<IBook>, IDeductCopyMethod>(
   {
+    image: { type: String, required: true },
     title: { type: String, required: true },
     author: { type: String, required: true },
     genre: {
       type: String,
       required: true,
-      enum: [
-        "FICTION",
-        "NON_FICTION",
-        "SCIENCE",
-        "HISTORY",
-        "BIOGRAPHY",
-        "FANTASY",
-      ],
+      enum: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"],
       uppercase: true,
     },
     isbn: { type: String, required: true, unique: true },
