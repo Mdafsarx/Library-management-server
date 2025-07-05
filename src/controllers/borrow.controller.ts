@@ -4,7 +4,7 @@ import { BorrowService } from "../services/borrow-service";
 export const BorrowController = {
   borrowBook: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await BorrowService.borrowBook(req.body);
+      const result = await BorrowService.borrowBook(req.params.bookId, req.body);
       res.status(201).json({
         success: true,
         message: "Book borrowed successfully",

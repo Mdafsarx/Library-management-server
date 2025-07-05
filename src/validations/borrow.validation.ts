@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const BorrowZodSchema = z.object({
-  book: z.string(),
+  bookId: z.string(),
   quantity: z.number(),
   dueDate: z.string().datetime(),
 });

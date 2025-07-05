@@ -4,12 +4,11 @@ import { IBorrow } from "../types/borrow";
 import { BorrowZodSchema } from "../validations/borrow.validation";
 
 export const BorrowService = {
-  borrowBook: async (requestData: IBorrow) => {
+  borrowBook: async (bookId: string, requestData: IBorrow) => {
     const body = await BorrowZodSchema.parseAsync(requestData);
-    const book = await Book.findById(body.book);
+    const book = await Book.findById(bookId);
     if (!book) throw new Error("Book not found!");
-    if (book.copies < body.quantity)
-      throw new Error("Not enough copies available");
+    if (book.copies < body.quantity) throw new Error("Not enough copies available");
 
     await book.deductCopy(body.quantity);
     await book.updateAvailability();
@@ -20,7 +19,7 @@ export const BorrowService = {
     const result = await Borrow.aggregate([
       {
         $group: {
-          _id: "$book",
+          _id: "$bookId",
           totalQuantity: { $sum: "$quantity" },
         },
       },

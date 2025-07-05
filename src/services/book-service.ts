@@ -1,9 +1,6 @@
 import { Book } from "../models/book.model";
 import { IBook, IQueryParams } from "../types/book";
-import {
-  bookUpdateZodSchema,
-  bookZodSchema,
-} from "../validations/book.validation";
+import { bookUpdateZodSchema, bookZodSchema } from "../validations/book.validation";
 
 export const BookService = {
   createBook: async (requestData: IBook) => {
@@ -13,12 +10,7 @@ export const BookService = {
   },
 
   getAllBooks: async (queryParams: IQueryParams) => {
-    const {
-      filter,
-      sortBy = "createdAt",
-      sort = "asc",
-      limit = 10,
-    } = queryParams;
+    const { filter, sortBy = "createdAt", sort = "asc", limit = 10 } = queryParams;
 
     let query = {};
     if (filter) {
@@ -33,21 +25,24 @@ export const BookService = {
     return books;
   },
 
-  getSingleBook: async (bookId: string) => {
-    const book = await Book.findById(bookId);
+  getSingleBook: async (id: string) => {
+    const book = await Book.findById(id);
     return book;
   },
 
-  updateBook: async (bookId: string, updateFields: Partial<IBook>) => {
+  updateBook: async (id: string, updateFields: Partial<IBook>) => {
     updateFields = await bookUpdateZodSchema.parseAsync(updateFields);
-    const updatedBook = await Book.findByIdAndUpdate(bookId, updateFields, {
+    if (typeof updateFields.copies === "number") {
+      updateFields.available = updateFields.copies > 0;
+    }
+    const updatedBook = await Book.findByIdAndUpdate(id, updateFields, {
       new: true,
     });
     return updatedBook;
   },
 
-  deleteBook: async (bookId: string) => {
-    await Book.findByIdAndDelete(bookId);
+  deleteBook: async (id: string) => {
+    await Book.findByIdAndDelete(id);
     return null;
   },
 };
