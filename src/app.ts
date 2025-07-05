@@ -7,7 +7,7 @@ import { borrowRouter } from "./routes/borrow.route";
 export const app: Application = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://library-management-client-tau.vercel.app",
+  "https://minimal-library-management-client.vercel.app",
 ];
 
 app.use(express.json());
