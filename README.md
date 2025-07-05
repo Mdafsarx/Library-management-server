@@ -28,7 +28,7 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Mdafsarx/Library-management-server
+git clone https://github.com/md-afsar-dev/Library-management-server
 cd Library-management-server
 
 # 2. Install dependencies
