@@ -6,7 +6,7 @@
 
 ---
 
-**`API`:** [Link](https://library-management-server-one-eta.vercel.app)  
+**`API`:** [Link](https://minimal-library-management-server.vercel.app)  
 **`Explanation`:** [Video](https://www.loom.com/share/90b206e371ad4f0599a4b0a3b59ca538?sid=ceef0fad-f71e-4f9b-b5ff-a506bdbbee8c)
 
 ## 🚀 Features
@@ -182,13 +182,13 @@ Supports:
 | `description` | `string`  | `No`     | Optional field                                                                 |
 | `copies`      | `number`  | `Yes`    | Must be an integer ≥ 0                                                         |
 | `available`   | `boolean` | `No`     | Optional field, defaults to `true` if not provided                             |
-|  |
+|               |
 
 ### Borrow Schema
 
 | Field      | Type       | Required | Validation           |
 | ---------- | ---------- | -------- | -------------------- |
-| `bookId`   | `ObjectId` | `Yes`  | Must be a valid book |
+| `bookId`   | `ObjectId` | `Yes`    | Must be a valid book |
 | `quantity` | `number`   | `Yes`    | Must be positive     |
 | `dueDate`  | `Date`     | `Yes`    | Future date required |
 
