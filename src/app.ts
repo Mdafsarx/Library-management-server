@@ -5,7 +5,10 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { borrowRouter } from "./routes/borrow.route";
 
 export const app: Application = express();
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://library-management-client-tau.vercel.app",
+];
 
 app.use(express.json());
 app.use(cors({ origin: allowedOrigins }));
