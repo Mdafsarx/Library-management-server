@@ -32,18 +32,20 @@ git clone https://github.com/Mdafsarx/Library-management-server
 cd Library-management-server
 
 # 2. Install dependencies
-npm install
+bun install
 
 # 3. Set up environment variables
 touch .env
 ```
 
 ### `.env` Example:
+
 ```
 PORT = 4000
 DB_NAME = ******
 DB_PASSWORD = *****
 ```
+
 ## 📂 Folder Structure
 
 ```sh
@@ -69,7 +71,7 @@ LIBRARY-MANAGEMENT-SERVER/
 ├── .prettierrc.json             # Prettier config
 ├── erdiagram.png                # ER diagram image
 ├── eslint.config.mjs            # ESLint configuration
-├── package-lock.json            # NPM lockfile
+├── bun.lock                     # bun lockfile
 ├── package.json                 # Project metadata and scripts
 ├── README.md                    # Project documentation
 ├── tsconfig.json                # TypeScript compiler config
@@ -86,11 +88,12 @@ http://localhost:5000/api
 
 ### 1. Create a Book
 
-**POST** `/api/books`
+**POST** `/api/create-book`
 
 ```json
 {
   "title": "The Theory of Everything",
+  "image": "https://res.cloudinary.com/dz1fy2tof/image/upload/v1751522624/download_n8dmde.jpg",
   "author": "Stephen Hawking",
   "genre": "SCIENCE",
   "isbn": "9780553380163",
@@ -105,6 +108,7 @@ http://localhost:5000/api
 **GET** `/api/books?filter=SCIENCE&sortBy=createdAt&sort=desc&limit=5`
 
 Supports:
+
 - `filter` (genre)
 - `sortBy` (e.g., createdAt)
 - `sort` (asc|desc)
@@ -112,11 +116,11 @@ Supports:
 
 ### 3. Get Book by ID
 
-**GET** `/api/books/:bookId`
+**GET** `/api/books/:id`
 
 ### 4. Update Book
 
-**PUT** `/api/books/:bookId`
+**PUT** `/api/edit-book/:id`
 
 ```json
 {
@@ -126,28 +130,29 @@ Supports:
 
 ### 5. Delete Book
 
-**DELETE** `/api/books/:bookId`
+**DELETE** `/api/delete-book/:id`
 
 ### 6. Borrow a Book
 
-**POST** `/api/borrow`
+**POST** `/api/borrow/:bookId`
 
 ```json
 {
-  "book": "64ab3f9e2a4b5c6d7e8f9012",
+  "bookId": "64ab3f9e2a4b5c6d7e8f9012",
   "quantity": 2,
   "dueDate": "2025-07-18T00:00:00.000Z"
 }
 ```
 
 📌 Business Logic:
+
 - Quantity must be less than or equal to available copies
 - Deduct copies automatically
 - If copies become 0, set `available = false`
 
 ### 7. Borrowed Books Summary
 
-**GET** `/api/borrow`
+**GET** `/api/borrow-summary`
 
 📌 Uses MongoDB Aggregation to return:
 
@@ -169,6 +174,7 @@ Supports:
 
 | Field         | Type      | Required | Validation                                                                     |
 | ------------- | --------- | -------- | ------------------------------------------------------------------------------ |
+| `image`       | `string`  | `Yes`    | Must be a valid URL string                                                     |
 | `title`       | `string`  | `Yes`    | —                                                                              |
 | `author`      | `string`  | `Yes`    | —                                                                              |
 | `genre`       | `enum`    | `Yes`    | One of: `FICTION`, `NON_FICTION`, `SCIENCE`, `HISTORY`, `BIOGRAPHY`, `FANTASY` |
@@ -176,12 +182,13 @@ Supports:
 | `description` | `string`  | `No`     | Optional field                                                                 |
 | `copies`      | `number`  | `Yes`    | Must be an integer ≥ 0                                                         |
 | `available`   | `boolean` | `No`     | Optional field, defaults to `true` if not provided                             |
+|  |
 
 ### Borrow Schema
 
 | Field      | Type       | Required | Validation           |
 | ---------- | ---------- | -------- | -------------------- |
-| `book`     | `ObjectId` | `Yes`    | Must be a valid book |
+| `bookId`   | `ObjectId` | `Yes`  | Must be a valid book |
 | `quantity` | `number`   | `Yes`    | Must be positive     |
 | `dueDate`  | `Date`     | `Yes`    | Future date required |
 
