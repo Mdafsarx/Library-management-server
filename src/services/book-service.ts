@@ -25,8 +25,8 @@ export const BookService = {
     return books;
   },
 
-  getSingleBook: async (bookId: string) => {
-    const book = await Book.findById(bookId);
+  getSingleBook: async (id: string) => {
+    const book = await Book.findById(id);
     return book;
   },
 

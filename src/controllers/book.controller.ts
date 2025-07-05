@@ -30,7 +30,7 @@ export const BookController = {
 
   getSingleBook: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await BookService.getSingleBook(req.params.bookId);
+      const result = await BookService.getSingleBook(req.params.id);
       res.status(200).json({
         success: true,
         message: "Book retrieved successfully",

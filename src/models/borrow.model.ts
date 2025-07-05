@@ -3,7 +3,7 @@ import { IBorrow } from "../types/borrow";
 
 const borrowSchema = new mongoose.Schema<IBorrow>(
   {
-    book: {
+    bookId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Book",
@@ -21,7 +21,7 @@ const borrowSchema = new mongoose.Schema<IBorrow>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const Borrow = mongoose.model("Borrow", borrowSchema);
